@@ -11,7 +11,7 @@
 // Include database connection and validation functions
 require_once '../config/db.php';
 require_once '../includes/validate.php';
-// require_once '../includes/header.php'; // Will be available once Member C completes it
+require_once '../includes/header.php';
 
 $message = "";
 
@@ -86,5 +86,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 <?php 
-// require_once '../includes/footer.php'; // Will be available once Member C completes it
+require_once '../includes/footer.php';
 ?>
