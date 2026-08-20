@@ -61,26 +61,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<!-- HTML Form for Login (Structure by Member B, Styling by Member C) -->
-<div class="auth-container">
-    <h2>Login</h2>
-    <?php if (!empty($error)): ?>
-        <p class="error-message"><?php echo $error; ?></p>
-    <?php endif; ?>
+<main class="container">
+    <div class="auth-card">
+        <h2>Welcome to the Library</h2>
+        <p>Please log in to manage books and borrow records.</p>
+        <?php if (!empty($error)): ?>
+            <p class="error-message" style="color: #d9534f; font-weight: bold;"><?php echo $error; ?></p>
+        <?php endif; ?>
 
-    <form action="login.php" method="POST" id="loginForm">
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password" required>
-        </div>
-        <button type="submit" class="btn-primary">Login</button>
-    </form>
-    <p>Don't have an account? <a href="register.php">Register here</a></p>
-</div>
+        <form action="login.php" method="POST" id="loginForm">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" name="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Log In</button>
+        </form>
+        <p class="auth-link">Don't have an account? <a href="register.php">Register here</a></p>
+    </div>
+</main>
 
 <?php 
 require_once '../includes/footer.php'; 

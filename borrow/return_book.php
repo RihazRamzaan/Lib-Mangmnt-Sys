@@ -85,13 +85,13 @@ require_once '../includes/header.php';
         <div class="alert <?php echo $status_type; ?>">
             <?php echo htmlspecialchars($message); ?>
         </div>
-        <p><a href="../books/list_books.php" class="btn-primary">Back to Books</a></p>
+        <p><a href="../borrow/my_borrows.php" class="btn-primary">Back to My Borrows</a></p>
     <?php else: ?>
         <p>Are you sure you want to return this book?</p>
         <form action="return_book.php" method="POST">
             <input type="hidden" name="book_id" value="<?php echo htmlspecialchars($_GET['book_id'] ?? ''); ?>">
             <button type="submit" class="btn-primary">Confirm Return</button>
-            <a href="../books/list_books.php" class="btn-secondary">Cancel</a>
+            <a href="../borrow/my_borrows.php" class="btn-secondary">Cancel</a>
         </form>
     <?php endif; ?>
 </div>

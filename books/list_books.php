@@ -65,35 +65,53 @@ require_once '../includes/header.php';
 <!-- HTML for Book Listing (Structure by Member B, Styling by Member C) -->
 <div class="container">
     <h2>Library Books</h2>
+    
+    <?php if (isset($_GET['success'])): ?>
+        <div class="success-message">
+            <?php echo htmlspecialchars($_GET['success']); ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (isset($_GET['error'])): ?>
+        <div class="error-message">
+            <?php echo htmlspecialchars($_GET['error']); ?>
+        </div>
+    <?php endif; ?>
 
     <!-- Search and Filter Form -->
     <form action="list_books.php" method="GET" class="filter-form">
-        <input type="text" name="search" placeholder="Search by title or author..." value="<?php echo htmlspecialchars($search); ?>">
+        <div class="form-group-inline">
+            <label for="search">Search</label>
+            <input type="text" id="search" name="search" placeholder="Search by title or author..." value="<?php echo htmlspecialchars($search); ?>">
+        </div>
         
-        <select name="category_id">
-            <option value="">All Categories</option>
-            <?php while ($cat = $cat_result->fetch_assoc()): ?>
-                <option value="<?php echo $cat['category_id']; ?>" <?php echo ($category_filter == $cat['category_id']) ? 'selected' : ''; ?>>
-                    <?php echo htmlspecialchars($cat['category_name']); ?>
-                </option>
-            <?php endwhile; ?>
-        </select>
+        <div class="form-group-inline">
+            <label for="category_id">Category</label>
+            <select id="category_id" name="category_id">
+                <option value="">All Categories</option>
+                <?php while ($cat = $cat_result->fetch_assoc()): ?>
+                    <option value="<?php echo $cat['category_id']; ?>" <?php echo ($category_filter == $cat['category_id']) ? 'selected' : ''; ?>>
+                        <?php echo htmlspecialchars($cat['category_name']); ?>
+                    </option>
+                <?php endwhile; ?>
+            </select>
+        </div>
         
-        <button type="submit" class="btn-secondary">Search</button>
-        <a href="list_books.php" class="btn-link">Clear</a>
+        <div style="display: flex; gap: 0.5rem;">
+            <button type="submit" class="btn btn-primary">Search</button>
+            <a href="list_books.php" class="btn btn-secondary">Clear</a>
+        </div>
     </form>
 
     <!-- Books Table -->
-    <table class="data-table">
+    <table class="styled-table">
         <thead>
             <tr>
                 <th>Title</th>
                 <th>Author</th>
                 <th>Category</th>
                 <th>Quantity</th>
-                <?php if (is_admin()): ?>
-                    <th>Actions</th>
-                <?php endif; ?>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -104,17 +122,25 @@ require_once '../includes/header.php';
                         <td><?php echo htmlspecialchars($book['author']); ?></td>
                         <td><?php echo htmlspecialchars($book['category_name'] ?? 'Uncategorized'); ?></td>
                         <td><?php echo $book['quantity']; ?></td>
-                        <?php if (is_admin()): ?>
-                            <td>
-                                <a href="edit_book.php?id=<?php echo $book['book_id']; ?>">Edit</a> | 
-                                <a href="delete_book.php?id=<?php echo $book['book_id']; ?>" onclick="return confirm('Are you sure?')">Delete</a>
-                            </td>
-                        <?php endif; ?>
+                        <td>
+                            <?php if (is_admin()): ?>
+                                <a href="edit_book.php?book_id=<?php echo $book['book_id']; ?>">Edit</a> | 
+                                <form action="delete_book.php" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure?')">
+                                    <input type="hidden" name="book_id" value="<?php echo $book['book_id']; ?>">
+                                    <button type="submit" style="background:none; border:none; color:#d9534f; text-decoration:underline; cursor:pointer; padding:0; font:inherit;">Delete</button>
+                                </form> | 
+                            <?php endif; ?>
+                            <?php if ($book['quantity'] > 0): ?>
+                                <a href="../borrow/borrow_book.php?book_id=<?php echo $book['book_id']; ?>" class="btn-sm btn-primary">Borrow</a>
+                            <?php else: ?>
+                                <span class="text-muted">Out of stock</span>
+                            <?php endif; ?>
+                        </td>
                     </tr>
                 <?php endwhile; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="<?php echo is_admin() ? '5' : '4'; ?>">No books found.</td>
+                    <td colspan="5">No books found.</td>
                 </tr>
             <?php endif; ?>
         </tbody>
