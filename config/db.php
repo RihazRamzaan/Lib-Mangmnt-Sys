@@ -12,8 +12,9 @@ $username = "root";
 $password = "";
 $database = "library_db";
 
+
 // Establish a new connection using the mysqli object-oriented API
-$conn = new mysqli($host, $username, $password, $database);
+$conn = new mysqli($host, $username, $password, $database,3308);
 
 // Check if the connection succeeded; exit and show an error if it failed
 if ($conn->connect_error) {

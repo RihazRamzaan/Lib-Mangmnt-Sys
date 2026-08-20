@@ -6,10 +6,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Calculate base URL dynamically based on project location in web root
-$doc_root = str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT']);
-$proj_root = str_replace('\\', '/', dirname(__DIR__));
-$base_url = str_replace($doc_root, '', $proj_root) . '/';
+// Ensure base URL can be found regardless of inclusion depth
+$base_url = '/root/Lib-Mangmnt-Sys/';
 ?>
 <!DOCTYPE html>
 <html lang="en">

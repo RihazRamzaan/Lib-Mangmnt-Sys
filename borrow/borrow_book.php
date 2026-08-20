@@ -74,6 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // If accessed via GET, we might want to show a confirmation or redirect
+
+require_once '../includes/header.php';
 ?>
 
 <div class="container">
@@ -94,3 +96,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     <?php endif; ?>
 </div>
+
+<?php require_once '../includes/footer.php'; ?>

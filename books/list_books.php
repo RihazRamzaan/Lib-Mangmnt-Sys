@@ -58,6 +58,8 @@ if (!empty($params)) {
 }
 $stmt->execute();
 $result = $stmt->get_result();
+
+require_once '../includes/header.php';
 ?>
 
 <!-- HTML for Book Listing (Structure by Member B, Styling by Member C) -->
@@ -120,5 +122,6 @@ $result = $stmt->get_result();
 </div>
 
 <?php
+require_once '../includes/footer.php';
 $stmt->close();
 ?>

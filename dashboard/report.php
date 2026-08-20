@@ -49,6 +49,8 @@ $popular_result = $conn->query($popular_sql);
 while ($row = $popular_result->fetch_assoc()) {
     $report_data['most_borrowed'][] = $row;
 }
+
+require_once '../includes/header.php';
 ?>
 
 <div class="container">
@@ -95,3 +97,5 @@ while ($row = $popular_result->fetch_assoc()) {
         </tbody>
     </table>
 </div>
+
+<?php require_once '../includes/footer.php'; ?>
