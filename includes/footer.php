@@ -2,7 +2,7 @@
 // includes/footer.php
 // Owner: Member C (Frontend Structure & Styling)
 
-$base_url = '/Lib-Mangmnt-Sys-1/';
+$base_url = '/root/Lib-Mangmnt-Sys/';
 ?>
     </main>
 

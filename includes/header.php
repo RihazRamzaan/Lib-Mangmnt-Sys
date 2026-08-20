@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // Ensure base URL can be found regardless of inclusion depth
-$base_url = '/Lib-Mangmnt-Sys-1/';
+$base_url = '/root/Lib-Mangmnt-Sys/';
 ?>
 <!DOCTYPE html>
 <html lang="en">
