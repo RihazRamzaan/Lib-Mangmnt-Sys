@@ -34,14 +34,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($stmt) {
         $stmt->bind_param("i", $book_id);
         
-        if ($stmt->execute()) {
-            if ($stmt->affected_rows > 0) {
-                header("Location: ../books/list_books.php?success=Book+deleted+successfully");
+        try {
+            if ($stmt->execute()) {
+                if ($stmt->affected_rows > 0) {
+                    header("Location: ../books/list_books.php?success=Book+deleted+successfully");
+                } else {
+                    header("Location: ../books/list_books.php?error=Book+not+found+or+already+deleted");
+                }
             } else {
-                header("Location: ../books/list_books.php?error=Book+not+found+or+already+deleted");
+                header("Location: ../books/list_books.php?error=Error+executing+delete+query");
             }
-        } else {
-            header("Location: ../books/list_books.php?error=Error+executing+delete+query");
+        } catch (mysqli_sql_exception $e) {
+            if ($e->getCode() == 1451) {
+                header("Location: ../books/list_books.php?error=Cannot+delete+book.+It+is+referenced+in+borrow+records.");
+            } else {
+                header("Location: ../books/list_books.php?error=A+database+error+occurred+while+deleting+the+book.");
+            }
         }
         $stmt->close();
     } else {

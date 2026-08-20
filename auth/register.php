@@ -61,29 +61,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <!-- HTML Form for Registration (Structure by Member B, Styling by Member C) -->
-<div class="auth-container">
-    <h2>Register</h2>
-    <?php if (!empty($message)): ?>
-        <p class="message"><?php echo $message; ?></p>
-    <?php endif; ?>
+<main class="container">
+    <div class="auth-card">
+        <h2>Register</h2>
+        <p>Create a new account to manage and borrow books.</p>
+        <?php if (!empty($message)): ?>
+            <p class="message"><?php echo $message; ?></p>
+        <?php endif; ?>
 
-    <form action="register.php" method="POST" id="registerForm">
-        <div class="form-group">
-            <label for="full_name">Full Name:</label>
-            <input type="text" name="full_name" id="full_name" required>
-        </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password" required>
-        </div>
-        <button type="submit" class="btn-primary">Register</button>
-    </form>
-    <p>Already have an account? <a href="login.php">Login here</a></p>
-</div>
+        <form action="register.php" method="POST" id="registerForm">
+            <div class="form-group">
+                <label for="full_name">Full Name</label>
+                <input type="text" name="full_name" id="full_name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" name="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+        <p class="auth-link">Already have an account? <a href="../index.php">Login here</a></p>
+    </div>
+</main>
 
 <?php 
 require_once '../includes/footer.php';
