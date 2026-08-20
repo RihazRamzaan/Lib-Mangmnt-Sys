@@ -1,8 +1,9 @@
 <?php
 // includes/footer.php
-// Owner: Member C (Frontend Structure & Styling)
-
-$base_url = '/Lib-Mangmnt-Sys-1/';
+// Calculate base URL dynamically
+$doc_root = str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT']);
+$proj_root = str_replace('\\', '/', dirname(__DIR__));
+$base_url = str_replace($doc_root, '', $proj_root) . '/';
 ?>
     </main>
 
